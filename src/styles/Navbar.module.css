@@ -1,3 +1,7 @@
 .NavContainer {
   background: linear-gradient(to right, #59eed3, #6fda40);
+}
+
+.Logout {
+  background: linear-gradient(to right, #8e7de5, #7651da);
 }/*# sourceMappingURL=Navbar.module.css.map */
