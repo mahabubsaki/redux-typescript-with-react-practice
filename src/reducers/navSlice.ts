@@ -1,13 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-interface navbarInitialState {
-    isSmallDevice: boolean,
-    isLargeDevice: boolean,
-}
+import { navbarInitialState } from '../interface/interface'
+
 const initialState: navbarInitialState = {
     isLargeDevice: false,
     isSmallDevice: false,
 }
-export const navSlice = createSlice({
+const navSlice = createSlice({
     name: 'navbar',
     initialState: initialState,
     reducers: {

@@ -10,8 +10,10 @@ import { AnyAction } from '@reduxjs/toolkit';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import Home from './components/pages/common/Home';
 import NavBackdrop from './components/shared/NavBackdrop';
+import { useDishes } from './hooks/useDishes';
 
 function App() {
+  useDishes()
   const isLargeOpen: boolean = useAppSelector(state => state.navSlice.isLargeDevice)
   const isSmallOpen: boolean = useAppSelector(state => state.navSlice.isSmallDevice)
   const dispatch: Dispatch<AnyAction> = useDispatch()
