@@ -5,7 +5,7 @@ const ActiveLink = ({ children, to, ...props }: ActiveProps) => {
     let resolved = useResolvedPath(to);
     let match = useMatch({ path: resolved.pathname, end: true });
     return (
-        <Link className={`p-[10px] text-white flex gap-3 items-center rounded-xl cursor-pointer ${match ? 'bg-[transparent]' : 'bg-[red]'}`} to={to}
+        <Link className={`p-[10px] text-white duration-300 flex gap-3 items-center rounded-xl cursor-pointer ${match ? 'bg-[red]' : 'bg-[transparent]'}`} to={to}
             {...props}>
             {children}
         </Link>

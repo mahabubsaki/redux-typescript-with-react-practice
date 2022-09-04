@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AllProducts = () => {
+const AllProducts = (): JSX.Element => {
     return (
         <div>
 

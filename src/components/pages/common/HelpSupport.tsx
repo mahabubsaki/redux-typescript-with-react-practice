@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HelpSupport = () => {
+const HelpSupport = (): JSX.Element => {
     return (
         <div>
 

@@ -1,3 +1,4 @@
+import { Component, FC, ReactElement, ReactNode } from "react";
 import { IconType } from "react-icons";
 
 export interface NavbarObj {
@@ -7,4 +8,8 @@ export interface NavbarObj {
 }export interface ActiveProps {
     children: JSX.Element[],
     to: string
+}
+export interface RouteObj {
+    elements: any;
+    path: string
 }

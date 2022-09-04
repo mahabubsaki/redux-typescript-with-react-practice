@@ -15,7 +15,8 @@ export const navSlice = createSlice({
             state.isSmallDevice = action.payload
         },
         toggleLarge: (state, action: PayloadAction<boolean>) => {
-            state.isLargeDevice = action.payload
+            const states = action.payload
+            state.isLargeDevice = states
         }
     }
 })

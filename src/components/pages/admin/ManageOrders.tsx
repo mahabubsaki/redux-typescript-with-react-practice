@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ManageOrders = () => {
+const ManageOrders = (): JSX.Element => {
     return (
         <div>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Transactions = () => {
+const Transactions = (): JSX.Element => {
     return (
         <div>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ManageUsers = () => {
+const ManageUsers = (): JSX.Element => {
     return (
         <div>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Refunds = () => {
+const Refunds = (): JSX.Element => {
     return (
         <div>
 
