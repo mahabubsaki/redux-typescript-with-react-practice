@@ -8,6 +8,7 @@ import { useAppSelector } from '../../app/hooks';
 import ActiveLink2 from '../../utils/ActiveLink2';
 const Navbar = () => {
     const isLargeOpen: boolean = useAppSelector(state => state.navSlice.isLargeDevice)
+    const isSmallOpen: boolean = useAppSelector(state => state.navSlice.isSmallDevice)
     return (
         <>
             {!isLargeOpen ? <div className={`border rounded-xl hidden my-xl:flex flex-col p-2 h-full relative overflow-y-auto ${isLargeOpen ? 'hidden' : 'block'} duration-100 justify-between ${styles.NavContainer}`}>
@@ -32,7 +33,7 @@ const Navbar = () => {
                 </div>
                 <img src={logout} alt="" className='w-[45px] h-[45px] mx-auto' />
             </div>}
-            <div className={`border rounded-xl flex my-xl:hidden flex-col p-2 h-full relative duration-100 overflow-y-auto justify-between ${styles.NavContainer}`}>
+            {!isSmallOpen && <div className={`border rounded-xl flex my-xl:hidden flex-col p-2 h-full relative duration-100 overflow-y-auto justify-between ${styles.NavContainer}`}>
                 <img src={logo} alt="" className='w-[45px] h-[45px] mx-auto' />
                 <div>
                     {navArray.map(item => <ActiveLink2 to={item.route}>
@@ -40,7 +41,7 @@ const Navbar = () => {
                     </ActiveLink2>)}
                 </div>
                 <img src={logout} alt="" className='w-[45px] h-[45px] mx-auto' />
-            </div>
+            </div>}
         </>
     );
 };
