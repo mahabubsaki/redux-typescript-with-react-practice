@@ -1,31 +1,39 @@
-import React, { Dispatch, useEffect } from 'react';
+import React, { Dispatch } from 'react';
 import './App.css';
 import Navbar from './components/shared/Navbar';
 import { TiThMenu } from 'react-icons/ti'
 import { Route, Routes } from 'react-router-dom';
-import { routeArray } from './constant/variables';
 import { useAppSelector } from './app/hooks';
 import { useDispatch } from 'react-redux';
-import { toggleLarge } from './reducers/navSlice';
+import { toggleLarge, toggleSmall } from './reducers/navSlice';
 import { AnyAction } from '@reduxjs/toolkit';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+import Home from './components/pages/common/Home';
+import NavBackdrop from './components/shared/NavBackdrop';
 
 function App() {
   const isLargeOpen: boolean = useAppSelector(state => state.navSlice.isLargeDevice)
+  const isSmallOpen: boolean = useAppSelector(state => state.navSlice.isSmallDevice)
   const dispatch: Dispatch<AnyAction> = useDispatch()
   return (
-    <div className="flex relative App">
-      <section className={`w-[12%] ${!isLargeOpen ? 'sm:w-[32%]' : 'sm:w-[12%]'} duration-500 h-screen fixed`}>
-        <div className="h-[100%] px-[10px] pt-[35px] bg-[#F7F5F2]">
-          <TiThMenu className="absolute right-[2px] text-3xl top-0 cursor-pointer" onClick={() => dispatch(toggleLarge(!isLargeOpen))} />
-          <Navbar />
-        </div>
-      </section>
-      <section className="w-[88%] ml-[12%] sm:ml-[32%] sm:w-[68%]">
-        <Routes>
-          {routeArray.map(route => <Route path={route.path} element={route.elements} />)}
-        </Routes>
-      </section>
-    </div>
+    <>
+      <div className="flex relative App">
+        <section className={`w-[85px] ${!isLargeOpen ? 'my-xl:w-[32%]' : 'my-xl:w-[12%]'} duration-100 h-screen fixed`}>
+          <div className="h-[100%] px-[10px] pt-[35px] bg-[#F7F5F2]">
+            {isLargeOpen ? <TiThMenu className="absolute hidden my-xl:block right-[2px] text-3xl top-0 cursor-pointer" onClick={() => dispatch(toggleLarge(!isLargeOpen))} /> : <AiOutlineCloseCircle className="absolute hidden my-xl:block right-[2px] text-3xl top-0 cursor-pointer" onClick={() => dispatch(toggleLarge(!isLargeOpen))} />}
+            <TiThMenu className="absolute block my-xl:hidden right-[2px] text-3xl top-0 cursor-pointer" onClick={() => dispatch(toggleSmall(!isSmallOpen))} />
+            <Navbar />
+          </div>
+        </section>
+        <section className={`w-[88%] duration-100 ml-[85px] ${!isLargeOpen ? 'my-xl:ml-[32%] my-xl:w-[68%]' : 'my-xl:ml-[12%] my-xl:w-[88%]'}`}>
+          <Routes>
+            {/* {routeArray.map(route => <Route path={route.path} element={route.elements} />)} */}
+            <Route path='/' element={<Home />} />
+          </Routes>
+        </section>
+      </div>
+      {isSmallOpen && <NavBackdrop />}
+    </>
   );
 }
 

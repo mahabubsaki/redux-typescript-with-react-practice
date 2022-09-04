@@ -6,10 +6,10 @@ export interface NavbarObj {
     icon: IconType;
     route: string;
 }export interface ActiveProps {
-    children: JSX.Element[],
+    children: JSX.Element[] | JSX.Element,
     to: string
 }
-export interface RouteObj {
-    elements: any;
-    path: string
-}
+// export interface RouteObj {
+//     elements: any;
+//     path: string
+// }

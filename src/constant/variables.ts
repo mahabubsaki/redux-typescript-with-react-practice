@@ -1,4 +1,4 @@
-import { NavbarObj, RouteObj } from "../interface/interface";
+import { NavbarObj } from "../interface/interface";
 import { AiFillHome } from 'react-icons/ai'
 import { FaMoneyBill, FaUserAlt, FaRegListAlt } from 'react-icons/fa'
 import { RiDashboardFill } from 'react-icons/ri'
@@ -100,19 +100,19 @@ export const navArray: NavbarObj[] = [{
     name: 'Help And Support',
     route: '/help'
 }]
-export const routeArray: RouteObj[] = [
-    { elements: Home, path: HomeRoute },
-    { elements: Dashboard, path: DashboardRoute },
-    { elements: ManageProducts, path: ManageProductsRoute },
-    { elements: ManageUsers, path: ManageUsersRoute },
-    { elements: ReviewProducts, path: ReviewProductsRoute },
-    { elements: ManageOrders, path: ManageOrdersRoute },
-    { elements: AllProducts, path: AllProductsRoute },
-    { elements: Profile, path: ProfileRoute },
-    { elements: Cart, path: CartRoute },
-    { elements: Orders, path: OrderRoute },
-    { elements: Refunds, path: RefundRoute },
-    { elements: Transactions, path: TransactionsRoute },
-    { elements: Settings, path: SettingsRoute },
-    { elements: HelpSupport, path: HelpAndSupportRoute },
-]
+// export const routeArray: RouteObj[] = [
+//     { elements: Home, path: HomeRoute },
+//     { elements: Dashboard, path: DashboardRoute },
+//     { elements: ManageProducts, path: ManageProductsRoute },
+//     { elements: ManageUsers, path: ManageUsersRoute },
+//     { elements: ReviewProducts, path: ReviewProductsRoute },
+//     { elements: ManageOrders, path: ManageOrdersRoute },
+//     { elements: AllProducts, path: AllProductsRoute },
+//     { elements: Profile, path: ProfileRoute },
+//     { elements: Cart, path: CartRoute },
+//     { elements: Orders, path: OrderRoute },
+//     { elements: Refunds, path: RefundRoute },
+//     { elements: Transactions, path: TransactionsRoute },
+//     { elements: Settings, path: SettingsRoute },
+//     { elements: HelpSupport, path: HelpAndSupportRoute },
+// ]
