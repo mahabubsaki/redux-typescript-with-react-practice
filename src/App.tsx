@@ -11,6 +11,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import Home from './components/pages/common/Home';
 import NavBackdrop from './components/shared/NavBackdrop';
 import { useDishes } from './hooks/useDishes';
+import AllProducts from './components/pages/common/AllProducts';
 
 function App() {
   useDishes()
@@ -19,7 +20,7 @@ function App() {
   const dispatch: Dispatch<AnyAction> = useDispatch()
   return (
     <>
-      <div className="flex relative App">
+      <div className="relative flex App">
         <section className={`w-[85px] ${!isLargeOpen ? 'my-xl:w-[32%]' : 'my-xl:w-[12%]'} duration-100 h-screen fixed`}>
           <div className="h-[100%] px-[10px] pt-[35px] bg-[#F7F5F2]">
             {isLargeOpen ? <TiThMenu className="absolute hidden my-xl:block right-[2px] text-3xl top-0 cursor-pointer" onClick={() => dispatch(toggleLarge(!isLargeOpen))} /> : <AiOutlineCloseCircle className="absolute hidden my-xl:block right-[2px] text-3xl top-0 cursor-pointer" onClick={() => dispatch(toggleLarge(!isLargeOpen))} />}
@@ -31,6 +32,7 @@ function App() {
           <Routes>
             {/* {routeArray.map(route => <Route path={route.path} element={route.elements} />)} */}
             <Route path='/' element={<Home />} />
+            <Route path='/all-products' element={<AllProducts />} />
           </Routes>
         </section>
       </div>

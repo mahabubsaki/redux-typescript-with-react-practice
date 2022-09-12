@@ -1,0 +1,73 @@
+.LoadingText::after {
+  -webkit-animation-name: rolling;
+          animation-name: rolling;
+  -webkit-animation-duration: 10s;
+          animation-duration: 10s;
+  content: ".";
+}
+
+@-webkit-keyframes rolling {
+  10% {
+    content: ".";
+  }
+  20% {
+    content: "..";
+  }
+  30% {
+    content: "...";
+  }
+  40% {
+    content: "....";
+  }
+  50% {
+    content: ".....";
+  }
+  60% {
+    content: "....";
+  }
+  70% {
+    content: "...";
+  }
+  80% {
+    content: "..";
+  }
+  90% {
+    content: ".";
+  }
+  100% {
+    content: "";
+  }
+}
+
+@keyframes rolling {
+  10% {
+    content: ".";
+  }
+  20% {
+    content: "..";
+  }
+  30% {
+    content: "...";
+  }
+  40% {
+    content: "....";
+  }
+  50% {
+    content: ".....";
+  }
+  60% {
+    content: "....";
+  }
+  70% {
+    content: "...";
+  }
+  80% {
+    content: "..";
+  }
+  90% {
+    content: ".";
+  }
+  100% {
+    content: "";
+  }
+}/*# sourceMappingURL=AllProduct.module.css.map */

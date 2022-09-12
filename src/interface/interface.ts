@@ -18,12 +18,13 @@ export interface navbarInitialState {
 }
 export interface productInitialState {
     idMeal: null | string,
+    productBg: string,
     strMeal: null | string,
     strDrinkAlternate: null | string,
     strCategory: null | string,
     strArea: null | string,
     strInstructions: null | string,
-    strMealThumb: null | string,
+    strMealThumb: undefined | string,
     strTags: null | string,
     strYoutube: null | string,
     strSource: null | string,
@@ -73,5 +74,6 @@ export interface productInitialState {
     strMeasure20: null | string,
 }
 export interface productSliceInterface {
-    product: productInitialState[] | null
+    products: productInitialState[],
+    isLoading: boolean
 }
