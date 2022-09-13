@@ -35,7 +35,7 @@ const useDishes = () => {
             if (!cancelled) {
                 const allProducts = [...first.meals, ...second.meals, ...third.meals, ...fourth.meals, ...fifth.meals, ...sixth.meals, ...seventh.meals, ...eigth.meals, ...ningth.meals, ...tenth.meals, ...eleventh.meals, ...twelvth.meals, ...thirteenth.meals, ...fourteenth.meals, ...fifteenth.meals, ...sixteenth.meals, ...seventingth.meals, ...eigthteenth.meals, ...nineteeth.meals, ...twentyth.meals, ...twentyfirst.meals, ...twentysecond.meals]
                 const productWithPrice = allProducts.map(pd => {
-                    return { ...pd, cost: Math.round(Math.random() * 1000), productBg: randomColor(), rating: Math.ceil(Math.random() * 5) }
+                    return { ...pd, cost: Math.round(Math.random() * 1000), productBg: randomColor(), rating: Math.ceil(Math.random() * 5), votes: Math.round(Math.random() * 50) }
                 })
                 dispatch(setFullProduct(productWithPrice))
                 dispatch(setLoadingState(false))

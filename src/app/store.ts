@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import navSlice from '../reducers/navSlice';
 import productSlice from '../reducers/productSlice';
+import singleProductSlice from '../reducers/singleProductSlice';
 
 export const store = configureStore({
   reducer: {
     navSlice: navSlice,
-    productSlice: productSlice
+    productSlice: productSlice,
+    singleProductSlice: singleProductSlice
   },
 });
 

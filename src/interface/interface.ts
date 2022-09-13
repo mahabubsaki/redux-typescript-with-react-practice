@@ -17,14 +17,15 @@ export interface navbarInitialState {
     isLargeDevice: boolean,
 }
 export interface productInitialState {
-    idMeal: null | string,
+    idMeal: string,
     rating: number,
+    votes: number,
     productBg: string,
     strMeal: null | string,
     strDrinkAlternate: null | string,
     strCategory: null | string,
     strArea: null | string,
-    strInstructions: null | string,
+    strInstructions: string,
     strMealThumb: undefined | string,
     strTags: null | string,
     strYoutube: null | string,
@@ -77,4 +78,7 @@ export interface productInitialState {
 export interface productSliceInterface {
     products: productInitialState[],
     isLoading: boolean
+}
+export interface singleProductSliceInterface {
+    foodId: string[]
 }
