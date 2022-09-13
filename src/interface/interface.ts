@@ -23,7 +23,7 @@ export interface productInitialState {
     productBg: string,
     strMeal: null | string,
     strDrinkAlternate: null | string,
-    strCategory: null | string,
+    strCategory: string,
     strArea: null | string,
     strInstructions: string,
     strMealThumb: undefined | string,
