@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Cart = (): JSX.Element => {
+const Cart: () => JSX.Element = () => {
     return (
         <div>
 

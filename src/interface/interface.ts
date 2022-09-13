@@ -18,6 +18,7 @@ export interface navbarInitialState {
 }
 export interface productInitialState {
     idMeal: null | string,
+    rating: number,
     productBg: string,
     strMeal: null | string,
     strDrinkAlternate: null | string,
