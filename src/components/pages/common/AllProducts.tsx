@@ -15,7 +15,6 @@ const AllProducts: () => JSX.Element = () => {
     const dispatch: Dispatch<AnyAction> = useDispatch()
     useEffect(() => {
         dispatch(setLoadingState(true))
-        dispatch(setFullProduct([]))
     }, [])
 
     if (isLoading) {

@@ -1,6 +1,5 @@
-import React, { Dispatch, MutableRefObject, useEffect, useMemo, useRef } from 'react';
+import React, { Dispatch, useEffect, useMemo, useRef } from 'react';
 import { productInitialState } from '../../interface/interface';
-import { randomColor } from '../../utils/RandomColor';
 import { AiTwotoneStar, AiOutlineStar } from 'react-icons/ai'
 import { useAppSelector } from '../../app/hooks';
 import { useDispatch } from 'react-redux';
@@ -8,7 +7,8 @@ import { addToIdStore, removeFromIdStore } from '../../reducers/singleProductSli
 import { AnyAction } from '@reduxjs/toolkit';
 
 const SingleProduct = ({ product }: { product: productInitialState }) => {
-    const { idMeal, dateModified, strArea, strCategory, strCreativeCommonsConfirmed, strDrinkAlternate, strImageSource, strMeal, strInstructions, strMealThumb, cost, productBg, rating, votes } = product
+    const { idMeal, strArea, strCategory, strTags, strMeal, strInstructions, strMealThumb, cost, productBg, rating, votes } = product
+    const colors: string[] = ['#48639C', '#4C4C9D', '#712F79', '#976391', '#F7996E', '#412234', '#6D466B', '#B49FCC', '#EAD7D7', '']
     const idList: string[] = useAppSelector(state => state.singleProductSlice.foodId)
     const dispatch: Dispatch<AnyAction> = useDispatch()
     useEffect(() => {
@@ -30,6 +30,7 @@ const SingleProduct = ({ product }: { product: productInitialState }) => {
                 }}>Show Less</span></p> : <p>{strInstructions.length < 200 ? strInstructions : `${strInstructions.slice(0, 200)}......`}<span className="ml-1 text-blue-600 hover:underline cursor-pointer" onClick={() => {
                     dispatch(addToIdStore(idMeal))
                 }}>Read More</span></p>}
+                <p className='text-center'>{strTags?.split(',').map(s => <span className="inline-block p-2 rounded bg-[#DFDFDE] m-2">#{s}</span>)}</p>
             </div>
         </div>
     );

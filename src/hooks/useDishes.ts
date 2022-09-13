@@ -2,11 +2,19 @@ import { AnyAction } from "@reduxjs/toolkit"
 import axios from "axios"
 import { Dispatch, useEffect } from "react"
 import { useDispatch } from "react-redux"
+import { useAppSelector } from "../app/hooks"
 import { setFullProduct, setLoadingState } from "../reducers/productSlice"
 import { randomColor } from "../utils/RandomColor"
 
 const useDishes = () => {
     const dispatch: Dispatch<AnyAction> = useDispatch()
+    const productArray = useAppSelector(state => state.productSlice.products)
+    if (productArray.length > 0) {
+        setTimeout(() => {
+            dispatch(setFullProduct(productArray))
+            dispatch(setLoadingState(false))
+        }, 2000)
+    }
     useEffect(() => {
         let cancelled = false
         const getAllData = async () => {
@@ -41,11 +49,11 @@ const useDishes = () => {
                 dispatch(setLoadingState(false))
             }
         }
-        getAllData()
+        productArray.length === 0 && getAllData()
         return () => {
             cancelled = true
         }
-    }, [dispatch])
+    }, [dispatch, productArray.length])
 }
 export {
     useDishes
