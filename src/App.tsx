@@ -22,14 +22,14 @@ function App() {
   return (
     <>
       <div className="relative flex App">
-        <section className={`w-[85px] ${!isLargeOpen ? 'my-xl:w-[32%]' : 'my-xl:w-[12%]'} duration-100 h-screen fixed`}>
+        <section className={`w-[85px] ${!isLargeOpen ? 'my-xl:w-[25%]' : 'my-xl:w-[12%]'} duration-100 h-screen fixed`}>
           <div className="h-[100%] px-[10px] pt-[35px] bg-[#F7F5F2]">
             {isLargeOpen ? <TiThMenu className="absolute hidden my-xl:block right-[2px] text-3xl top-0 cursor-pointer" onClick={() => dispatch(toggleLarge(!isLargeOpen))} /> : <AiOutlineCloseCircle className="absolute hidden my-xl:block right-[2px] text-3xl top-0 cursor-pointer" onClick={() => dispatch(toggleLarge(!isLargeOpen))} />}
             <TiThMenu className="absolute block my-xl:hidden right-[2px] text-3xl top-0 cursor-pointer" onClick={() => dispatch(toggleSmall(!isSmallOpen))} />
             <Navbar />
           </div>
         </section>
-        <section className={`w-[88%] duration-100 ml-[85px] ${!isLargeOpen ? 'my-xl:ml-[32%] my-xl:w-[68%]' : 'my-xl:ml-[12%] my-xl:w-[88%]'}`}>
+        <section className={`w-[88%] duration-100 ml-[85px] ${!isLargeOpen ? 'my-xl:ml-[25%] my-xl:w-[75%]' : 'my-xl:ml-[12%] my-xl:w-[88%]'}`}>
           <Routes>
             {/* {routeArray.map(route => <Route path={route.path} element={route.elements} />)} */}
             <Route path='/' element={<Home />} />

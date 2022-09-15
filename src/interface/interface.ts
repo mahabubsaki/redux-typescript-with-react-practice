@@ -27,7 +27,7 @@ export interface productInitialState {
     strArea: null | string,
     strInstructions: string,
     strMealThumb: undefined | string,
-    strTags: null | string,
+    strTags: string,
     strYoutube: null | string,
     strSource: null | string,
     strImageSource: string,
