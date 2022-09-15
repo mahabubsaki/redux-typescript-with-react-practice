@@ -21,7 +21,7 @@ export interface productInitialState {
     rating: number,
     votes: number,
     productBg: string,
-    strMeal: null | string,
+    strMeal: string,
     strDrinkAlternate: null | string,
     strCategory: string,
     strArea: null | string,

@@ -116,3 +116,5 @@ export const navArray: NavbarObj[] = [{
 //     { elements: Settings, path: SettingsRoute },
 //     { elements: HelpSupport, path: HelpAndSupportRoute },
 // ]
+export const catefories: string[] = ['Beef', 'Chicken', 'Dessert', 'Lamb', 'Miscellaneous', 'Pasta', 'Pork', 'Seafood', 'Side', 'Starter', 'Vegan', 'Vegetarian', 'Breakfast', 'Goat', 'Unknown']
+export const colors: string[] = ['#EAD7D7', '#B49FCC', '#6D466B', '#412234', '#C97064', '#BCA371', '#A6B07E', '#68A357', '#32965D', '#BFC0C0', '#EF8354', '#F7AEF8', '#B388EB', '#8093F1', '#72DDF7']
