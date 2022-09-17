@@ -12,9 +12,8 @@ const Navbar = () => {
     return (
         <>
             {!isLargeOpen ? <div className={`border rounded-xl hidden my-xl:flex flex-col p-2 h-full relative overflow-y-auto ${isLargeOpen ? 'hidden' : 'block'} duration-100 justify-between ${styles.NavContainer}`}>
-                <div className='mt-2 flex h-[50px] gap-4 items-center'>
+                <div className='mt-2 flex h-[50px] justify-center items-center'>
                     <img src={logo} width='50px' height='100%' alt="" />
-                    <p className="text-[24px] text-center mt-2 mb-[10px] font-bold">Redefine Dashboard</p>
                 </div>
                 <div>
                     {navArray.map(item => <ActiveLink to={item.route}>

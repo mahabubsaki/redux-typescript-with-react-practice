@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import { useAppSelector } from './app/hooks';
 import { useDispatch } from 'react-redux';
 import { toggleLarge, toggleSmall } from './reducers/navSlice';
+import 'antd/dist/antd.css';
 import { AnyAction } from '@reduxjs/toolkit';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import Home from './components/pages/common/Home';
