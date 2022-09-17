@@ -3,7 +3,7 @@ import axios from "axios"
 import { Dispatch, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { useAppSelector } from "../app/hooks"
-import { setFullProduct, setLoadingState } from "../reducers/productSlice"
+import { setFullProduct, setLoadingState, setSelectedProducts, setVisualProducts } from "../reducers/productSlice"
 import { randomColor } from "../utils/RandomColor"
 
 const useDishes = () => {
@@ -46,6 +46,8 @@ const useDishes = () => {
                     return { ...pd, cost: Math.round(Math.random() * 1000), productBg: randomColor(), rating: Math.ceil(Math.random() * 5), votes: Math.round(Math.random() * 50) }
                 })
                 dispatch(setFullProduct(productWithPrice))
+                dispatch(setSelectedProducts(productWithPrice))
+                dispatch(setVisualProducts(productWithPrice.slice(0, 10)))
                 dispatch(setLoadingState(false))
             }
         }

@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { Dispatch } from 'react';
 import styles from '../../../styles/AllProduct.module.css'
 import { useDishes } from '../../../hooks/useDishes';
 import { FaSearch } from 'react-icons/fa';
@@ -10,16 +10,36 @@ import { catefories } from '../../../constant/variables';
 import CombineProducts from '../../childs/CombineProducts';
 import { useAppSelector } from '../../../app/hooks';
 import { Pagination } from 'antd';
+import { productInitialState } from '../../../interface/interface';
+import { AnyAction } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
+import { setCurrentPage, setLoadingState, setPageSize, setSelectedProducts, setVisualProducts } from '../../../reducers/productSlice';
 
 const AllProducts: () => JSX.Element = () => {
-    const handlepage = () => {
-
-    }
-    const handlesize = () => {
-
-    }
     useDishes()
+    const dispatch: Dispatch<AnyAction> = useDispatch()
     const isLoading: boolean = useAppSelector(state => state.productSlice.isLoading)
+    const products: productInitialState[] = useAppSelector(state => state.productSlice.products)
+    const selectedProducts: productInitialState[] = useAppSelector(state => state.productSlice.selectedProducts)
+    const currentPage: number = useAppSelector(state => state.productSlice.currentPage)
+    const currentPageSize: number = useAppSelector(state => state.productSlice.pageSize)
+
+
+    const handlePagination = (current: number, pageSize: number): void => {
+        dispatch(setLoadingState(true))
+        let sliced;
+        if (currentPageSize !== pageSize) {
+            dispatch(setPageSize(pageSize))
+            sliced = selectedProducts.slice(0, pageSize)
+        } else {
+            sliced = selectedProducts.slice(((current - 1) * pageSize), ((current - 1) * pageSize) + pageSize)
+        }
+
+        dispatch(setCurrentPage(currentPageSize !== pageSize ? 1 : current))
+        dispatch(setVisualProducts(sliced))
+        dispatch(setLoadingState(false))
+    }
+
     return (
         <div>
             <div className="sticky top-0 left-0 right-0 p-3 bg-[#f7f5f2]">
@@ -27,7 +47,13 @@ const AllProducts: () => JSX.Element = () => {
                     <div>
                         <Select onChange={(e) => {
                             if (e.target.value) {
-                                alert(e.target.value)
+                                if (e.target.value === 'all') {
+                                    dispatch(setSelectedProducts(products))
+                                } else {
+                                    dispatch(setSelectedProducts(products.filter(pd => pd.strCategory === e.target.value)))
+                                }
+                                dispatch(setCurrentPage(1))
+                                dispatch(setVisualProducts(products.filter(pd => pd.strCategory === e.target.value).slice(0, currentPageSize)))
                             }
                         }} icon={<MdArrowDropDown />} isDisabled={isLoading} placeholder='Select Food Category'>
                             <option value="all">All</option>
@@ -44,22 +70,9 @@ const AllProducts: () => JSX.Element = () => {
                             <Input disabled={isLoading} type='tel' placeholder='Search Food' />
                         </InputGroup>
                     </div>
-                    <div className={styles.SelectRange}>
-                        <Select onChange={(e) => {
-                            if (e.target.value) {
-                                alert(e.target.value)
-                            }
-                        }} icon={<MdArrowDropDown />} isDisabled={isLoading} placeholder='Foods Per Page'>
-                            <option value="10">10</option>
-                            <option value="15">15</option>
-                            <option value="20">20</option>
-                            <option value="25">25</option>
-                            <option value="30">30</option>
-                        </Select>
-                    </div>
                 </div>
                 <div className='flex justify-center'>
-                    <Pagination onChange={handlepage} disabled={isLoading} onShowSizeChange={handlesize} total={500} responsive={true} defaultCurrent={1} />
+                    <Pagination onChange={handlePagination} disabled={isLoading} defaultPageSize={10} pageSizeOptions={[10, 15, 20, 25, 30]} total={selectedProducts.length} size="default" current={currentPage} />
                 </div>
             </div>
             <CombineProducts />

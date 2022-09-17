@@ -9,7 +9,7 @@ import SingleProduct from './SingleProduct';
 
 const CombineProducts = () => {
     const isLoading: boolean = useAppSelector(state => state.productSlice.isLoading)
-    const products: productInitialState[] = useAppSelector(state => state.productSlice.products)
+    const visualProducts: productInitialState[] = useAppSelector(state => state.productSlice.visualProducts)
     const dispatch: Dispatch<AnyAction> = useDispatch()
     useEffect(() => {
         dispatch(setLoadingState(true))
@@ -20,7 +20,7 @@ const CombineProducts = () => {
     }
     return (
         <div className="bg-[#d7d7d7] p-4 grid grid-cols-1  md:grid-cols-2 gap-5">
-            {products.map(product => <SingleProduct product={product} />)}
+            {visualProducts.map(product => <SingleProduct product={product} />)}
         </div>
     );
 };

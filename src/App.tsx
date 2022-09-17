@@ -1,4 +1,4 @@
-import React, { Dispatch, useState } from 'react';
+import React, { Dispatch } from 'react';
 import './App.css';
 import Navbar from './components/shared/Navbar';
 import { TiThMenu } from 'react-icons/ti'
@@ -15,7 +15,6 @@ import { useDishes } from './hooks/useDishes';
 import AllProducts from './components/pages/common/AllProducts';
 
 function App() {
-  const [state, setState] = useState()
   useDishes()
   const isLargeOpen: boolean = useAppSelector(state => state.navSlice.isLargeDevice)
   const isSmallOpen: boolean = useAppSelector(state => state.navSlice.isSmallDevice)

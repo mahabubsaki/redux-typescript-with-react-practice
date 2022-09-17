@@ -76,6 +76,10 @@ export interface productInitialState {
 }
 export interface productSliceInterface {
     products: productInitialState[],
+    selectedProducts: productInitialState[],
+    visualProducts: productInitialState[],
+    currentPage: number,
+    pageSize: number,
     isLoading: boolean
 }
 export interface singleProductSliceInterface {
