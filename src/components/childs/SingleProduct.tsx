@@ -32,14 +32,14 @@ const SingleProduct = ({ product }: { product: productInitialState }) => {
                     }}>Show Less</span></p> : <p>{strInstructions.length < 200 ? strInstructions : `${strInstructions.slice(0, 200)}......`}<span className="ml-1 text-blue-600 hover:underline cursor-pointer" onClick={() => {
                         dispatch(addToIdStore(idMeal))
                     }}>Read More</span></p>}
-                    <p className='text-center'>{strTags?.split(',').map(s => <span style={{ color: checkIfBlack(productBg, strMeal) ? 'white' : 'black', backgroundColor: productBg }} className="inline-block p-2 rounded m-2">#{s}</span>)}</p>
+                    <p className='text-center'>{strTags?.split(',').map(s => <span style={{ color: checkIfBlack(productBg) ? 'white' : 'black', backgroundColor: productBg }} className="inline-block p-2 rounded m-2">#{s}</span>)}</p>
 
 
                 </div>
             </div>
             <div className='flex gap-3 justify-center px-4'>
-                <button style={{ color: checkIfBlack(productBg, strMeal) ? 'white' : 'black', backgroundColor: productBg, borderColor: productBg }} className="my-2 px-2 py-4 w-full text-base sm:text-base lg:text-xl rounded-lg">Details</button>
-                <button style={{ color: checkIfBlack(productBg, strMeal) ? 'white' : 'black', backgroundColor: productBg, borderColor: productBg }} className="my-2 px-2 py-4 w-full rounded-lg flex justify-center items-center text-base sm:text-base lg:text-xl gap-4"><BsFillCartPlusFill className='text-3xl' /><span>Add To Cart</span> </button>
+                <button style={{ color: checkIfBlack(productBg) ? 'white' : 'black', backgroundColor: productBg, borderColor: productBg }} className="my-2 px-2 py-4 w-full text-base sm:text-base lg:text-xl rounded-lg">Details</button>
+                <button style={{ color: checkIfBlack(productBg) ? 'white' : 'black', backgroundColor: productBg, borderColor: productBg }} className="my-2 px-2 py-4 w-full rounded-lg flex justify-center items-center text-base sm:text-base lg:text-xl gap-4"><BsFillCartPlusFill className='text-3xl' /><span>Add To Cart</span> </button>
             </div>
         </div>
     );
