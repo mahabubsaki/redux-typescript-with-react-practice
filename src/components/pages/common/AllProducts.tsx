@@ -1,5 +1,5 @@
 
-import React, { Dispatch } from 'react';
+import React, { Dispatch, useEffect } from 'react';
 import styles from '../../../styles/AllProduct.module.css'
 import { useDishes } from '../../../hooks/useDishes';
 import { FaSearch } from 'react-icons/fa';
@@ -13,7 +13,7 @@ import { Pagination } from 'antd';
 import { productInitialState } from '../../../interface/interface';
 import { AnyAction } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import { setCurrentPage, setLoadingState, setPageSize, setSelectedProducts, setVisualProducts } from '../../../reducers/productSlice';
+import { setCurrentCategory, setCurrentPage, setLoadingState, setPageSize, setSelectedProducts, setVisualProducts } from '../../../reducers/productSlice';
 
 const AllProducts: () => JSX.Element = () => {
     useDishes()
@@ -23,6 +23,7 @@ const AllProducts: () => JSX.Element = () => {
     const selectedProducts: productInitialState[] = useAppSelector(state => state.productSlice.selectedProducts)
     const currentPage: number = useAppSelector(state => state.productSlice.currentPage)
     const currentPageSize: number = useAppSelector(state => state.productSlice.pageSize)
+    const currentCategory: string = useAppSelector(state => state.productSlice.category)
 
 
     const handlePagination = (current: number, pageSize: number): void => {
@@ -37,23 +38,39 @@ const AllProducts: () => JSX.Element = () => {
 
         dispatch(setCurrentPage(currentPageSize !== pageSize ? 1 : current))
         dispatch(setVisualProducts(sliced))
-        dispatch(setLoadingState(false))
+        setTimeout(() => {
+            dispatch(setLoadingState(false))
+        }, 1000)
     }
-
+    useEffect(() => {
+        dispatch(setSelectedProducts(products))
+        dispatch(setVisualProducts(products.slice(0, 10)))
+        dispatch(setCurrentPage(1))
+        dispatch(setPageSize(10))
+    }, [products, dispatch])
     return (
         <div>
             <div className="sticky top-0 left-0 right-0 p-3 bg-[#f7f5f2]">
+                <p className='text-center my-2 text-lg font-semibold'>Total {selectedProducts.length} Foods Found in {currentCategory === 'All' ? 'All' : currentCategory} Category</p>
                 <div className='grid grid-cols-1 my-xl:grid-cols-2 gap-3 mb-4'>
                     <div>
                         <Select onChange={(e) => {
                             if (e.target.value) {
+                                dispatch(setLoadingState(true))
+                                let filtered = products.filter(pd => pd.strCategory === e.target.value)
                                 if (e.target.value === 'all') {
+                                    dispatch(setCurrentCategory('All'))
                                     dispatch(setSelectedProducts(products))
+                                    filtered = products
                                 } else {
-                                    dispatch(setSelectedProducts(products.filter(pd => pd.strCategory === e.target.value)))
+                                    dispatch(setCurrentCategory(e.target.value))
+                                    dispatch(setSelectedProducts(filtered))
                                 }
                                 dispatch(setCurrentPage(1))
-                                dispatch(setVisualProducts(products.filter(pd => pd.strCategory === e.target.value).slice(0, currentPageSize)))
+                                dispatch(setVisualProducts(filtered.slice(0, currentPageSize)))
+                                setTimeout(() => {
+                                    dispatch(setLoadingState(false))
+                                }, 1000)
                             }
                         }} icon={<MdArrowDropDown />} isDisabled={isLoading} placeholder='Select Food Category'>
                             <option value="all">All</option>

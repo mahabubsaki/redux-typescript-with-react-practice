@@ -80,7 +80,8 @@ export interface productSliceInterface {
     visualProducts: productInitialState[],
     currentPage: number,
     pageSize: number,
-    isLoading: boolean
+    isLoading: boolean,
+    category: string
 }
 export interface singleProductSliceInterface {
     foodId: string[]

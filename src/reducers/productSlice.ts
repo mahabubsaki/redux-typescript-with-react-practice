@@ -7,7 +7,8 @@ const initialState: productSliceInterface = {
     visualProducts: [],
     isLoading: true,
     currentPage: 1,
-    pageSize: 10
+    pageSize: 10,
+    category: 'All'
 }
 const productSlice = createSlice({
     name: 'product-reducer',
@@ -30,8 +31,11 @@ const productSlice = createSlice({
         },
         setPageSize: (state, action: PayloadAction<number>) => {
             state.pageSize = action.payload
+        },
+        setCurrentCategory: (state, action: PayloadAction<string>) => {
+            state.category = action.payload
         }
     }
 })
-export const { setFullProduct, setLoadingState, setSelectedProducts, setVisualProducts, setCurrentPage, setPageSize } = productSlice.actions
+export const { setFullProduct, setLoadingState, setSelectedProducts, setVisualProducts, setCurrentPage, setPageSize, setCurrentCategory } = productSlice.actions
 export default productSlice.reducer

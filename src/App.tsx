@@ -1,4 +1,4 @@
-import React, { Dispatch } from 'react';
+import React, { Dispatch, lazy, Suspense } from 'react';
 import './App.css';
 import Navbar from './components/shared/Navbar';
 import { TiThMenu } from 'react-icons/ti'
@@ -9,10 +9,13 @@ import { toggleLarge, toggleSmall } from './reducers/navSlice';
 import 'antd/dist/antd.css';
 import { AnyAction } from '@reduxjs/toolkit';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
-import Home from './components/pages/common/Home';
-import NavBackdrop from './components/shared/NavBackdrop';
 import { useDishes } from './hooks/useDishes';
-import AllProducts from './components/pages/common/AllProducts';
+import NavBackdrop from './components/shared/NavBackdrop';
+import ProductLoader from './utils/ProductLoader';
+// import Home from './components/pages/common/Home';
+// import AllProducts from './components/pages/common/AllProducts';
+const Home = lazy(() => import('./components/pages/common/Home'))
+const AllProducts = lazy(() => import('./components/pages/common/AllProducts'))
 
 function App() {
   useDishes()
@@ -30,11 +33,12 @@ function App() {
           </div>
         </section>
         <section className={`w-[88%] duration-100 ml-[85px] ${!isLargeOpen ? 'my-xl:ml-[25%] my-xl:w-[75%]' : 'my-xl:ml-[12%] my-xl:w-[88%]'}`}>
-          <Routes>
-            {/* {routeArray.map(route => <Route path={route.path} element={route.elements} />)} */}
-            <Route path='/' element={<Home />} />
-            <Route path='/all-products' element={<AllProducts />} />
-          </Routes>
+          <Suspense fallback={<ProductLoader />}>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/all-products' element={<AllProducts />} />
+            </Routes>
+          </Suspense>
         </section>
       </div>
       {isSmallOpen && <NavBackdrop />}
