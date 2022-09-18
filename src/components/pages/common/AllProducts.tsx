@@ -1,10 +1,10 @@
 
-import React, { Dispatch, useEffect } from 'react';
+import React, { Dispatch, LegacyRef, RefObject, useEffect, useRef } from 'react';
 import styles from '../../../styles/AllProduct.module.css'
 import { useDishes } from '../../../hooks/useDishes';
 import { FaSearch } from 'react-icons/fa';
 import { MdArrowDropDown } from 'react-icons/md';
-import { Select, InputGroup, InputLeftElement, Input } from '@chakra-ui/react'
+import { Select, InputGroup, InputLeftElement, Input, useDisclosure, Button, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, DrawerFooter } from '@chakra-ui/react'
 
 import { catefories } from '../../../constant/variables';
 import CombineProducts from '../../childs/CombineProducts';
@@ -17,6 +17,8 @@ import { setCurrentCategory, setCurrentPage, setLoadingState, setPageSize, setSe
 
 const AllProducts: () => JSX.Element = () => {
     useDishes()
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const btnRef = useRef() as LegacyRef<HTMLButtonElement>
     const dispatch: Dispatch<AnyAction> = useDispatch()
     const isLoading: boolean = useAppSelector(state => state.productSlice.isLoading)
     const products: productInitialState[] = useAppSelector(state => state.productSlice.products)
@@ -52,9 +54,9 @@ const AllProducts: () => JSX.Element = () => {
         <div>
             <div className="sticky top-0 left-0 right-0 p-3 bg-[#f7f5f2]">
                 <p className='text-center my-2 text-lg font-semibold'>Total {selectedProducts.length} Foods Found in {currentCategory === 'All' ? 'All' : currentCategory} Category</p>
-                <div className='grid grid-cols-1 my-xl:grid-cols-2 gap-3 mb-4'>
+                <div className='grid grid-cols-1 my-xl:grid-cols-3 gap-3 mb-4'>
                     <div>
-                        <Select onChange={(e) => {
+                        <Select bg="chakra-body-bg" onChange={(e) => {
                             if (e.target.value) {
                                 dispatch(setLoadingState(true))
                                 let filtered = products.filter(pd => pd.strCategory === e.target.value)
@@ -78,8 +80,8 @@ const AllProducts: () => JSX.Element = () => {
 
                         </Select>
                     </div>
-                    <div>
-                        <InputGroup>
+                    <div className='relative'>
+                        <InputGroup bg="chakra-body-bg">
                             <InputLeftElement
                                 pointerEvents='none'
                                 children={<FaSearch color='gray.300' />}
@@ -87,6 +89,31 @@ const AllProducts: () => JSX.Element = () => {
                             <Input disabled={isLoading} type='tel' placeholder='Search Food' />
                         </InputGroup>
                     </div>
+                    <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
+                        Open
+                    </Button>
+                    <Drawer
+                        isOpen={isOpen}
+                        placement='right'
+                        onClose={onClose}
+                    >
+                        <DrawerOverlay />
+                        <DrawerContent>
+                            <DrawerCloseButton />
+                            <DrawerHeader>Create your account</DrawerHeader>
+
+                            <DrawerBody>
+                                <Input placeholder='Type here...' />
+                            </DrawerBody>
+
+                            <DrawerFooter>
+                                <Button variant='outline' mr={3} onClick={onClose}>
+                                    Cancel
+                                </Button>
+                                <Button colorScheme='blue'>Save</Button>
+                            </DrawerFooter>
+                        </DrawerContent>
+                    </Drawer>
                 </div>
                 <div className='flex justify-center'>
                     <Pagination onChange={handlePagination} disabled={isLoading} defaultPageSize={10} pageSizeOptions={[10, 15, 20, 25, 30]} total={selectedProducts.length} size="default" current={currentPage} />
