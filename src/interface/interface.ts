@@ -16,6 +16,7 @@ export interface navbarInitialState {
     isLargeDevice: boolean,
 }
 export interface productInitialState {
+    quantity: number,
     idMeal: string,
     rating: number,
     votes: number,
@@ -90,4 +91,7 @@ export interface SearchInputSliceInterface {
     visible: boolean,
     searching: boolean,
     matchedFood: productInitialState[]
+}
+export interface cartSliceInterface {
+    cartFood: productInitialState[]
 }

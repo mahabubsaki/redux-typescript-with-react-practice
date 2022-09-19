@@ -1,4 +1,5 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import cartSlice from '../reducers/cartSlice';
 import navSlice from '../reducers/navSlice';
 import productSlice from '../reducers/productSlice';
 import SearchInputSlice from '../reducers/SearchInputSlice';
@@ -9,7 +10,8 @@ export const store = configureStore({
     navSlice: navSlice,
     productSlice: productSlice,
     singleProductSlice: singleProductSlice,
-    searchSlice: SearchInputSlice
+    searchSlice: SearchInputSlice,
+    cartSlice: cartSlice
   },
 });
 
