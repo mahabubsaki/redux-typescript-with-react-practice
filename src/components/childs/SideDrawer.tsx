@@ -1,5 +1,5 @@
 import React from 'react';
-import { Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, DrawerFooter, Button, Input } from '@chakra-ui/react'
+import { Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody } from '@chakra-ui/react'
 
 const SideDrawer = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
     return (
@@ -11,16 +11,30 @@ const SideDrawer = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void 
             <DrawerOverlay />
             <DrawerContent>
                 <DrawerCloseButton />
-                <DrawerHeader>Create your account</DrawerHeader>
+                <DrawerHeader className='text-xl font-bold'>Cart Status</DrawerHeader>
                 <DrawerBody>
-                    <Input placeholder='Type here...' />
+                    <p className='text-xl text-center mb-2'>Payment Cost Info</p>
+                    <div className='bg-[#FFF8BC] rounded-xl p-4 text-lg flex flex-col gap-2'>
+                        <div className='flex justify-between'>
+                            <p>Total Items :</p>
+                            <p className='font-bold'>0</p>
+                        </div>
+                        <div className='flex justify-between'>
+                            <p>Total Price :</p>
+                            <p className='font-bold'>$0</p>
+                        </div>
+                        <div className='flex justify-between'>
+                            <p>VAT :</p>
+                            <p className='font-bold'>$0</p>
+                        </div>
+                        <hr className='border-[1.5px] border-black' />
+                        <div className='flex justify-between'>
+                            <p>Grand Total :</p>
+                            <p className='font-bold'>$0</p>
+                        </div>
+                    </div>
+                    <p className='text-xl text-center my-2'>Cart Food Info</p>
                 </DrawerBody>
-                <DrawerFooter>
-                    <Button variant='outline' mr={3} onClick={onClose}>
-                        Cancel
-                    </Button>
-                    <Button colorScheme='blue'>Save</Button>
-                </DrawerFooter>
             </DrawerContent>
         </Drawer>
     );

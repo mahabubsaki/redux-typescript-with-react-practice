@@ -117,7 +117,7 @@ const AllProducts: () => JSX.Element = () => {
                         </Select>
                         <div>
                             <Badge count={1} showZero>
-                                <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
+                                <Button disabled={isLoading} ref={btnRef} colorScheme='teal' onClick={onOpen}>
                                     <BsCartFill />
                                 </Button>
                             </Badge>
