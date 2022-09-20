@@ -45,7 +45,7 @@ const SingleProduct = ({ product }: { product: productInitialState }) => {
                     }}>Show Less</span></p> : <p>{strInstructions.length < 200 ? strInstructions : `${strInstructions.slice(0, 200)}......`}<span className="ml-1 text-blue-600 hover:underline cursor-pointer" onClick={() => {
                         dispatch(addToIdStore(idMeal))
                     }}>Read More</span></p>}
-                    <p className='text-center'>{strTags?.split(',').map(s => <span style={{ color: checkIfBlack(productBg) ? 'white' : 'black', backgroundColor: productBg }} className="inline-block p-2 rounded m-2">#{s}</span>)}</p>
+                    <p className='text-center'>{strTags?.split(',').map((s, index) => <span key={index} style={{ color: checkIfBlack(productBg) ? 'white' : 'black', backgroundColor: productBg }} className="inline-block p-2 rounded m-2">#{s}</span>)}</p>
                 </div>
             </div>
             <div className='flex gap-3 justify-center px-4'>

@@ -16,7 +16,7 @@ const Navbar = () => {
                     <img src={logo} width='50px' height='100%' alt="" />
                 </div>
                 <div>
-                    {navArray.map(item => <ActiveLink to={item.route}>
+                    {navArray.map((item, index) => <ActiveLink key={index} to={item.route}>
                         <item.icon /><span>{item.name}</span>
                     </ActiveLink>)}
                 </div>
@@ -26,7 +26,7 @@ const Navbar = () => {
             </div> : <div className={`border rounded-xl hidden my-xl:flex flex-col p-2 h-full relative ${!isLargeOpen ? 'hidden' : 'block'} duration-100 overflow-y-auto justify-between ${styles.NavContainer}`}>
                 <img src={logo} alt="" className='w-[45px] h-[45px] mx-auto' />
                 <div>
-                    {navArray.map(item => <ActiveLink to={item.route}>
+                    {navArray.map((item, index) => <ActiveLink key={index} to={item.route}>
                         <item.icon />
                     </ActiveLink>)}
                 </div>
@@ -35,7 +35,7 @@ const Navbar = () => {
             {!isSmallOpen && <div className={`border rounded-xl flex my-xl:hidden flex-col p-2 h-full relative duration-100 overflow-y-auto justify-between ${styles.NavContainer}`}>
                 <img src={logo} alt="" className='w-[45px] h-[45px] mx-auto' />
                 <div>
-                    {navArray.map(item => <ActiveLink2 to={item.route}>
+                    {navArray.map((item, index) => <ActiveLink2 key={index} to={item.route}>
                         <item.icon />
                     </ActiveLink2>)}
                 </div>

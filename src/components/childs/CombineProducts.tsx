@@ -20,7 +20,7 @@ const CombineProducts = () => {
     }
     return (
         <div className="bg-[#d7d7d7] p-4 grid grid-cols-1  md:grid-cols-2 gap-5">
-            {visualProducts.map(product => <SingleProduct product={product} />)}
+            {visualProducts.map(product => <SingleProduct product={product} key={product.idMeal} />)}
         </div>
     );
 };

@@ -24,7 +24,7 @@ const NavBackdrop = () => {
                         <p className="text-[24px] text-center mt-2 mb-[10px] font-bold">Redefine Dashboard</p>
                     </div>
                     <div>
-                        {navArray.map(item => <ActiveLink2 to={item.route}>
+                        {navArray.map((item, index) => <ActiveLink2 key={index} to={item.route}>
                             <item.icon /><span>{item.name}</span>
                         </ActiveLink2>)}
                     </div>
