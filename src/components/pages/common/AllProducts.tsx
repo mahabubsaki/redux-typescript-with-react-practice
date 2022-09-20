@@ -31,6 +31,7 @@ const AllProducts: () => JSX.Element = () => {
     const currentPageSize: number = useAppSelector(state => state.productSlice.pageSize)
     const currentCategory: string = useAppSelector(state => state.productSlice.category)
     const isSearchBoxVisible: boolean = useAppSelector(state => state.searchSlice.visible)
+    const currentCart: productInitialState[] = useAppSelector(state => state.cartSlice.cartFood)
 
 
     const handlePagination = (current: number, pageSize: number): void => {
@@ -116,7 +117,7 @@ const AllProducts: () => JSX.Element = () => {
                             {catefories.map((c) => <option value={c}>{c}</option>)}
                         </Select>
                         <div>
-                            <Badge count={1} showZero>
+                            <Badge count={currentCart.length} showZero>
                                 <Button disabled={isLoading} ref={btnRef} colorScheme='teal' onClick={onOpen}>
                                     <BsCartFill />
                                 </Button>

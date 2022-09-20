@@ -9,16 +9,7 @@ const cartSlice = createSlice({
     initialState: initialState,
     reducers: {
         addToCart: (state, action: PayloadAction<productInitialState>) => {
-            const currentFoods = state.cartFood.find(item => item.idMeal === action.payload.idMeal)
-            if (!currentFoods) {
-                state.cartFood = [...state.cartFood, action.payload]
-            } else {
-                currentFoods.quantity++
-                const restFoods = state.cartFood.filter(item => item.idMeal !== action.payload.idMeal)
-                const currentFoodIndex = state.cartFood.findIndex(item => item.idMeal === action.payload.idMeal)
-                restFoods.splice(currentFoodIndex, 0, currentFoods)
-                state.cartFood = [...restFoods]
-            }
+            state.cartFood = [...state.cartFood, action.payload]
         },
         removeFromCart: (state, action: PayloadAction<string>) => {
             state.cartFood = state.cartFood.filter(item => item.idMeal !== action.payload)
@@ -26,15 +17,8 @@ const cartSlice = createSlice({
         clearAll: (state,) => {
             state.cartFood = []
         },
-        changeQuantity: (state, action: PayloadAction<string>) => {
-            const restFoods = state.cartFood.filter(item => item.idMeal !== action.payload)
-            const currentFoods = state.cartFood.find(item => item.idMeal === action.payload)
-            const currentFoodIndex = state.cartFood.findIndex(item => item.idMeal === action.payload)
-            if (currentFoods) {
-                currentFoods.quantity++
-                restFoods.splice(currentFoodIndex, 0, currentFoods)
-            }
-            state.cartFood = [...restFoods]
+        changeQuantity: (state, action: PayloadAction<productInitialState[]>) => {
+            state.cartFood = [...action.payload]
         }
     }
 })

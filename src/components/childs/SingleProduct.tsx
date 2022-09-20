@@ -1,4 +1,4 @@
-import React, { Dispatch, useEffect, useMemo, useRef } from 'react';
+import React, { Dispatch, MouseEventHandler, useEffect, useMemo, useRef } from 'react';
 import { productInitialState } from '../../interface/interface';
 import { AiTwotoneStar, AiOutlineStar } from 'react-icons/ai'
 import { useAppSelector } from '../../app/hooks';
@@ -8,18 +8,25 @@ import { addToIdStore, removeFromIdStore } from '../../reducers/singleProductSli
 import { AnyAction } from '@reduxjs/toolkit';
 import { catefories, colors } from '../../constant/variables';
 import { checkIfBlack } from '../../utils/CheckIfBlack';
-import { addToCart } from '../../reducers/cartSlice';
+import { addToCart, changeQuantity } from '../../reducers/cartSlice';
 
 const SingleProduct = ({ product }: { product: productInitialState }) => {
     const { idMeal, strArea, strCategory, strTags, strMeal, strInstructions, strMealThumb, cost, productBg, rating, votes } = product
     const idList: string[] = useAppSelector(state => state.singleProductSlice.foodId)
-    const arr: productInitialState[] = useAppSelector(state => state.cartSlice.cartFood)
-    useEffect(() => {
-        console.log(arr);
-    }, [arr])
+    const currentCart: productInitialState[] = useAppSelector(state => state.cartSlice.cartFood)
     const dispatch: Dispatch<AnyAction> = useDispatch()
-    useEffect(() => {
-    }, [productBg])
+    const handleAddToCart = (): void => {
+        const currentFoods = currentCart.find(item => item.idMeal === idMeal)
+        if (!currentFoods) {
+            dispatch(addToCart(product))
+        } else {
+            const updatedQuantity = { ...currentFoods, quantity: currentFoods.quantity + 1 }
+            const restFoods = currentCart.filter(item => item.idMeal !== idMeal)
+            const currentFoodIndex = currentCart.findIndex(item => item.idMeal === idMeal)
+            restFoods.splice(currentFoodIndex, 0, updatedQuantity)
+            dispatch(changeQuantity(restFoods))
+        }
+    }
     return (
         <div className={`shadow rounded-lg bg-[white] flex flex-col justify-between pb-4`}>
             <div>
@@ -43,7 +50,7 @@ const SingleProduct = ({ product }: { product: productInitialState }) => {
             </div>
             <div className='flex gap-3 justify-center px-4'>
                 <button style={{ color: checkIfBlack(productBg) ? 'white' : 'black', backgroundColor: productBg, borderColor: productBg }} className="my-2 px-2 py-4 w-full text-base sm:text-base lg:text-xl rounded-lg">Details</button>
-                <button onClick={() => dispatch(addToCart(product))} style={{ color: checkIfBlack(productBg) ? 'white' : 'black', backgroundColor: productBg, borderColor: productBg }} className="my-2 px-2 py-4 w-full rounded-lg flex justify-center items-center text-base sm:text-base lg:text-xl gap-4"><BsFillCartPlusFill className='text-3xl' /><span>Add To Cart</span> </button>
+                <button onClick={handleAddToCart} style={{ color: checkIfBlack(productBg) ? 'white' : 'black', backgroundColor: productBg, borderColor: productBg }} className="my-2 px-2 py-4 w-full rounded-lg flex justify-center items-center text-base sm:text-base lg:text-xl gap-4"><BsFillCartPlusFill className='text-3xl' /><span>Add To Cart</span> </button>
             </div>
         </div>
     );
