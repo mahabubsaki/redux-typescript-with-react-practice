@@ -84,7 +84,9 @@ export interface productSliceInterface {
     category: string
 }
 export interface singleProductSliceInterface {
-    foodId: string[]
+    foodId: string[],
+    modalStatus: boolean,
+    food: null | productInitialState
 }
 export interface SearchInputSliceInterface {
     searchValue: string,

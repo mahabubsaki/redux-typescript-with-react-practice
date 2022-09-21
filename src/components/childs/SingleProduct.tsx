@@ -4,7 +4,7 @@ import { AiTwotoneStar, AiOutlineStar } from 'react-icons/ai'
 import { useAppSelector } from '../../app/hooks';
 import { BsFillCartPlusFill } from 'react-icons/bs'
 import { useDispatch } from 'react-redux';
-import { addToIdStore, removeFromIdStore } from '../../reducers/singleProductSlice';
+import { addToIdStore, removeFromIdStore, setModalFood, setModalStatus } from '../../reducers/singleProductSlice';
 import { AnyAction } from '@reduxjs/toolkit';
 import { catefories, colors } from '../../constant/variables';
 import { checkIfBlack } from '../../utils/CheckIfBlack';
@@ -49,7 +49,11 @@ const SingleProduct = ({ product }: { product: productInitialState }) => {
                 </div>
             </div>
             <div className='flex gap-3 justify-center px-4'>
-                <button style={{ color: checkIfBlack(productBg) ? 'white' : 'black', backgroundColor: productBg, borderColor: productBg }} className="my-2 px-2 py-4 w-full text-base sm:text-base lg:text-xl rounded-lg">Details</button>
+                <button onClick={() => {
+                    dispatch(setModalStatus(true))
+                    dispatch(setModalFood(product))
+
+                }} style={{ color: checkIfBlack(productBg) ? 'white' : 'black', backgroundColor: productBg, borderColor: productBg }} className="my-2 px-2 py-4 w-full text-base sm:text-base lg:text-xl rounded-lg">Details</button>
                 <button onClick={handleAddToCart} style={{ color: checkIfBlack(productBg) ? 'white' : 'black', backgroundColor: productBg, borderColor: productBg }} className="my-2 px-2 py-4 w-full rounded-lg flex justify-center items-center text-base sm:text-base lg:text-xl gap-4"><BsFillCartPlusFill className='text-3xl' /><span>Add To Cart</span> </button>
             </div>
         </div>
