@@ -14,8 +14,7 @@ import { BsCartFill } from 'react-icons/bs';
 import SearchResult from '../childs/SearchResult';
 import { setMatchedFood, setSearching, setSearchValue, setVisible } from '../../reducers/SearchInputSlice';
 
-const FilterPart = () => {
-    const { onOpen } = useDisclosure()
+const FilterPart = ({ onOpen }: { onOpen: () => void }) => {
     const [, startTransition] = useTransition();
     const btnRef = useRef() as LegacyRef<HTMLButtonElement>
     const dispatch: Dispatch<AnyAction> = useDispatch()

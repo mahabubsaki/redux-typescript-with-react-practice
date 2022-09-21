@@ -13,6 +13,10 @@ export const store = configureStore({
     searchSlice: SearchInputSlice,
     cartSlice: cartSlice
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    immutableCheck: false,
+    serializableCheck: false,
+  })
 });
 
 export type AppDispatch = typeof store.dispatch;

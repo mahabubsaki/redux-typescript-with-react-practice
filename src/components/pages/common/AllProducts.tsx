@@ -11,11 +11,12 @@ import { setVisible } from '../../../reducers/SearchInputSlice';
 
 const AllProducts: () => JSX.Element = () => {
     useDishes()
-    const { isOpen, onClose } = useDisclosure()
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const dispatch: Dispatch<AnyAction> = useDispatch()
+    // console.log('re-render')
     return (
         <div onClick={() => dispatch(setVisible(false))}>
-            <FilterPart />
+            <FilterPart onOpen={onOpen} />
             <CombineProducts />
             <SideDrawer isOpen={isOpen} onClose={onClose} />
         </div>
