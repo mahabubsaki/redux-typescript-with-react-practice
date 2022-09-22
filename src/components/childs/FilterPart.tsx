@@ -1,8 +1,8 @@
 
-import React, { ChangeEvent, Dispatch, LegacyRef, useRef, useTransition, useEffect } from 'react';
+import React, { ChangeEvent, Dispatch, LegacyRef, useRef, useEffect, MutableRefObject } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { MdArrowDropDown } from 'react-icons/md';
-import { Select, InputGroup, InputLeftElement, Input, useDisclosure, Button } from '@chakra-ui/react'
+import { Select, InputGroup, Input, Button, InputRightElement } from '@chakra-ui/react'
 import { catefories } from '../../constant/variables';
 import { useAppSelector } from '../../app/hooks';
 import { Badge, Pagination } from 'antd';
@@ -13,9 +13,10 @@ import { setCurrentCategory, setCurrentPage, setLoadingState, setPageSize, setSe
 import { BsCartFill } from 'react-icons/bs';
 import SearchResult from '../childs/SearchResult';
 import { setMatchedFood, setSearching, setSearchValue, setVisible } from '../../reducers/SearchInputSlice';
+import toast from 'react-hot-toast';
 
 const FilterPart = ({ onOpen }: { onOpen: () => void }) => {
-    const [, startTransition] = useTransition();
+    const inputRef = useRef() as MutableRefObject<HTMLInputElement>
     const btnRef = useRef() as LegacyRef<HTMLButtonElement>
     const dispatch: Dispatch<AnyAction> = useDispatch()
     const isLoading: boolean = useAppSelector(state => state.productSlice.isLoading)
@@ -61,19 +62,20 @@ const FilterPart = ({ onOpen }: { onOpen: () => void }) => {
             }, 1000)
         }
     }
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(setSearching(true))
-        dispatch(setSearchValue(e.target.value))
-        const match = products.filter(pd => pd.strMeal.toLowerCase().includes(e.target.value.toLowerCase()))
-        if (e.target.value) {
-            startTransition(() => {
-                dispatch(setMatchedFood(match))
-            })
+    const handleInputChange = (e: string) => {
+        if (!!e) {
+            dispatch(setSearching(true))
+        }
+        dispatch(setSearchValue(e))
+        const match = products.filter(pd => pd.strMeal.toLowerCase().includes(e.toLowerCase()))
+        if (e) {
+            dispatch(setMatchedFood(match))
         } else {
             dispatch(setMatchedFood([]))
         }
         setTimeout(() => {
             dispatch(setSearching(false))
+            inputRef.current.value = ''
         }, 500)
     }
     useEffect(() => {
@@ -91,13 +93,18 @@ const FilterPart = ({ onOpen }: { onOpen: () => void }) => {
             <div className='grid grid-cols-1 my-xl:grid-cols-2 gap-3 mb-4'>
                 <div className='relative'>
                     <InputGroup bg="chakra-body-bg">
-                        <InputLeftElement
-                            pointerEvents='none'
-                            children={<FaSearch color='gray.300' />}
-                        />
-                        <Input onChange={handleInputChange} onFocus={() => {
+                        <InputRightElement children={<Button disabled={isLoading || !isSearchBoxVisible} onClick={(e) => {
+                            e.stopPropagation()
+                            if (inputRef.current.value.length < 3) {
+                                toast.error('You need to input at least 3 characters to search your foods')
+                            } else {
+                                handleInputChange(inputRef.current.value)
+                            }
+
+                        }} colorScheme='whatsapp'><FaSearch color='gray.300' /></Button>} />
+                        <Input placeholder='Search Your Preffered Food' disabled={isLoading} onClick={(e) => e.stopPropagation()} ref={inputRef} onFocus={() => {
                             dispatch(setVisible(true))
-                        }} onClick={(e) => e.stopPropagation()} disabled={isLoading} type='tel' placeholder='Search Food' />
+                        }} />
                     </InputGroup>
                     {isSearchBoxVisible && <SearchResult />}
                 </div>
