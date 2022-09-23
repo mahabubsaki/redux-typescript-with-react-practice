@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { productInitialState, singleProductSliceInterface } from "../interface/interface";
+import { ingrediantAndMeasureInterface, productInitialState, singleProductSliceInterface } from "../interface/interface";
 
 const initialState: singleProductSliceInterface = {
     foodId: [],
     modalStatus: false,
-    food: null
+    food: null,
+    ingrediants: []
 }
 const singleProductSlice = createSlice({
     initialState: initialState,
@@ -21,8 +22,11 @@ const singleProductSlice = createSlice({
         },
         setModalFood: (state, action: PayloadAction<productInitialState | null>) => {
             state.food = action.payload
+        },
+        setIngrediant: (state, action: PayloadAction<ingrediantAndMeasureInterface[]>) => {
+            state.ingrediants = action.payload
         }
     }
 })
-export const { addToIdStore, removeFromIdStore, setModalFood, setModalStatus } = singleProductSlice.actions
+export const { addToIdStore, removeFromIdStore, setModalFood, setModalStatus, setIngrediant } = singleProductSlice.actions
 export default singleProductSlice.reducer

@@ -86,7 +86,8 @@ export interface productSliceInterface {
 export interface singleProductSliceInterface {
     foodId: string[],
     modalStatus: boolean,
-    food: null | productInitialState
+    food: null | productInitialState,
+    ingrediants: ingrediantAndMeasureInterface[]
 }
 export interface SearchInputSliceInterface {
     searchValue: string,
@@ -96,4 +97,8 @@ export interface SearchInputSliceInterface {
 }
 export interface cartSliceInterface {
     cartFood: productInitialState[]
+}
+export interface ingrediantAndMeasureInterface {
+    ingrediant: string,
+    measure: string
 }
