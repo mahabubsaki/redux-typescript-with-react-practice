@@ -31,7 +31,7 @@ const AllProducts: () => JSX.Element = () => {
             <FilterPart onOpen={onOpen} />
             <CombineProducts />
             <SideDrawer isOpen={isOpen} onClose={onClose} />
-            {modalFood && <Modal title={modalFood && modalFood.strMeal} open={isModalOpen} footer={[<Button shape='round' type='dashed' onClick={() => {
+            {modalFood && <Modal title={modalFood && <p className='text-2xl text-center font-bold' style={{ color: modalFood.productBg }}>{modalFood.strMeal}</p>} open={isModalOpen} footer={[<Button shape='round' type='dashed' onClick={() => {
                 dispatch(setModalStatus(false))
                 dispatch(setModalFood(null))
             }}>Cancel</Button>]} onCancel={() => {
